@@ -35,7 +35,7 @@ class Application(tk.Tk):
         self.return_date.grid(row=2, sticky="nesw", padx=4, pady=4)
 
         # Set up book button
-        self.book_button = ttk.Button(self, text="Book", command=self.display_message, state="disabled")
+        self.book_button = tk.Button(self, text="Book", command=self.display_message, state="disabled", foreground="gray")
         self.book_button.grid(row=3, sticky="nesw", padx=5, pady=5)
 
     def check_box1(self):
@@ -57,15 +57,15 @@ class Application(tk.Tk):
         if self.flight_options.get() == "one-way flight":
             self.return_date["state"] = "disabled"
             if self.check_box1():
-                self.book_button["state"] = "normal"
+                self.book_button.configure(state="normal", foreground="black")
             else:
-                self.book_button["state"] = "disabled"
+                self.book_button.configure(state="disabled", foreground="gray")
         else:
             self.return_date["state"] = "normal"
             if self.check_box1() and self.check_box2():
-                self.book_button["state"] = "normal"
+                self.book_button.configure(state="normal", foreground="black")
             else:
-                self.book_button["state"] = "disabled"
+                self.book_button.configure(state="disabled", foreground="gray")
 
     def validate_date(self, *args):
         focused_widget = self.focus_get()
@@ -74,15 +74,15 @@ class Application(tk.Tk):
         if focused_widget in [self.start_date, self.return_date]:
             if not focused_widget.get():
                 focused_widget["bg"] = "white"
-                self.book_button["state"] = "disabled"
+                self.book_button.configure(state="disabled", foreground="gray")
             else:
                 try:
                     datetime.strptime(focused_widget.get(), '%d.%m.%Y')
                     focused_widget["bg"] = "white"
-                    self.book_button["state"] = "normal"
+                    self.book_button.configure(state="normal", foreground="black")
                 except ValueError:
                     focused_widget["bg"] = "red"
-                    self.book_button["state"] = "disabled"
+                    self.book_button.configure(state="disabled", foreground="gray")
 
         # Compare dates if return flight is selected
         if self.flight_options.get() == "return flight":
@@ -97,11 +97,11 @@ class Application(tk.Tk):
             date1 = datetime.strptime(date_str1, "%d.%m.%Y")
             date2 = datetime.strptime(date_str2, "%d.%m.%Y")
             if date2 < date1:
-                self.book_button["state"] = "disabled"
+                self.book_button.configure(state="disabled", fg="gray")
             else:
-                self.book_button["state"] = "normal"
+                self.book_button.configure(state="normal", fg="black")
         except ValueError:
-            self.book_button["state"] = "disabled"
+            self.book_button.configure(state="disabled", fg="gray")
 
     def display_message(self):
         # Display booking information

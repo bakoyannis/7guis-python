@@ -2,4 +2,4 @@
 
 ## How to run
 - Install [python](https://www.python.org/downloads/) (At the time of writting v3.12 was used)
-- from a command line `python filename.py`
+- `python filename.py`

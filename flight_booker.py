@@ -41,20 +41,15 @@ class Application(tk.Tk):
     def check_box1(self):
         try:
             datetime.strptime(self.start_date.get(), '%d.%m.%Y')
-            self.start_date["bg"] = "white"
-            self.book_button["state"] = "normal"
             return True
         except ValueError:
-            self.start_date["bg"] = "red"
             return False
 
     def check_box2(self):
         try:
             datetime.strptime(self.return_date.get(), '%d.%m.%Y')
-            self.return_date["bg"] = "white"
             return True
         except ValueError:
-            self.return_date["bg"] = "red"
             return False
 
     def on_combobox_select(self, event):

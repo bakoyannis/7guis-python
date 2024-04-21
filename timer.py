@@ -47,8 +47,8 @@ class Application(tk.Tk):
         if not (self.elapsed_ms/1000) >= self.d_time:
             self.progress_bar["value"] = ((self.d_time - diff) / self.d_time) * 100 if self.d_time else 0
             # Update the timer every 10ms
-            self.elapsed_ms += 10
-            self.after(10, self.update_timer)
+            self.elapsed_ms += 1
+            self.after(1, self.update_timer)
         else:
             self.progress_bar["value"] = 100
 

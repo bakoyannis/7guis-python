@@ -31,7 +31,7 @@ class Application(tk.Tk):
         self.entry_val2 = tk.StringVar()
         self.entry_val2.trace_add("write", self.validate_date)
         self.return_date = tk.Entry(self, textvariable=self.entry_val2)
-        self.return_date.config(state="disabled")
+        self.return_date["state"] = "disabled"
         self.return_date.grid(row=2, sticky="nesw", padx=3, pady=3)
 
         # Set up book button
@@ -41,11 +41,9 @@ class Application(tk.Tk):
     def on_combobox_select(self, event):
         # Enable or disable return date entry based on flight option
         if self.flight_options.get() == "one-way flight":
-            self.return_date.config(state="disabled")
+            self.return_date["state"] = "disabled"
         else:
-            self.return_date.config(state="normal")
-
-        if self.flight_options.get() == "one-way flight" or "return flight":
+            self.return_date["state"] = "normal"
             self.book_button["state"] = "disabled"
 
     def validate_date(self, *args):
@@ -58,10 +56,10 @@ class Application(tk.Tk):
             else:
                 try:
                     datetime.strptime(focused_widget.get(), '%d.%m.%Y')
-                    focused_widget.configure(bg="white")
+                    focused_widget["bg"] = "white"
                     self.book_button["state"] = "normal"
                 except ValueError:
-                    focused_widget.configure(bg="red")
+                    focused_widget["bg"] = "red"
                     self.book_button["state"] = "disabled"
 
         # Compare dates if return flight is selected

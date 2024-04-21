@@ -42,6 +42,13 @@ class Application(tk.Tk):
         # Enable or disable return date entry based on flight option
         if self.flight_options.get() == "one-way flight":
             self.return_date["state"] = "disabled"
+            try:
+                datetime.strptime(self.start_date.get(), '%d.%m.%Y')
+                self.start_date["bg"] = "white"
+                self.book_button["state"] = "normal"
+            except ValueError:
+                self.start_date["bg"] = "red"
+                self.book_button["state"] = "disabled"
         else:
             self.return_date["state"] = "normal"
             self.book_button["state"] = "disabled"

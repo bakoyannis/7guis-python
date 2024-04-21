@@ -72,7 +72,6 @@ class Application(tk.Tk):
             else:
                 self.book_button["state"] = "disabled"
 
-
     def validate_date(self, *args):
         focused_widget = self.focus_get()
 

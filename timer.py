@@ -27,6 +27,7 @@ class Application(tk.Tk):
 
         self.d_time = 10
         self.elapsed_ms = 0
+        self.timer_id = None
         self.d_slider = ttk.Scale(self, from_=0, to=100, orient="horizontal", command=self.slider_update)
         self.d_slider.set(10)
         self.d_slider.grid(row=2, column=1, sticky="nswe", padx=10)
@@ -48,12 +49,13 @@ class Application(tk.Tk):
             self.progress_bar["value"] = ((self.d_time - diff) / self.d_time) * 100 if self.d_time else 0
             # Update the timer every 1ms
             self.elapsed_ms += 1
-            self.after(1, self.update_timer)
+            self.timer_id = self.after(1, self.update_timer)
         else:
             self.progress_bar["value"] = 100
 
     def reset(self):
         self.elapsed_ms = 0
+        self.after_cancel(self.timer_id)
         self.start_timer()
 
     def slider_update(self, value):

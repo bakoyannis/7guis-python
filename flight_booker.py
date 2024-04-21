@@ -9,7 +9,7 @@ class Application(tk.Tk):
 
         # Set up main window
         self.title("Book Flight")
-        self.geometry("300x100")
+        self.geometry("300x120")
         for x in range(4):
             self.rowconfigure(x, weight=1)
         self.columnconfigure(0, weight=1)
@@ -38,20 +38,40 @@ class Application(tk.Tk):
         self.book_button = ttk.Button(self, text="Book", command=self.display_message, state="disabled")
         self.book_button.grid(row=3, sticky="nesw", padx=3, pady=3)
 
+    def check_box1(self):
+        try:
+            datetime.strptime(self.start_date.get(), '%d.%m.%Y')
+            self.start_date["bg"] = "white"
+            self.book_button["state"] = "normal"
+            return True
+        except ValueError:
+            self.start_date["bg"] = "red"
+            return False
+
+    def check_box2(self):
+        try:
+            datetime.strptime(self.return_date.get(), '%d.%m.%Y')
+            self.return_date["bg"] = "white"
+            return True
+        except ValueError:
+            self.return_date["bg"] = "red"
+            return False
+
     def on_combobox_select(self, event):
-        # Enable or disable return date entry based on flight option
+        # Extra checks for boxes
         if self.flight_options.get() == "one-way flight":
             self.return_date["state"] = "disabled"
-            try:
-                datetime.strptime(self.start_date.get(), '%d.%m.%Y')
-                self.start_date["bg"] = "white"
+            if self.check_box1():
                 self.book_button["state"] = "normal"
-            except ValueError:
-                self.start_date["bg"] = "red"
+            else:
                 self.book_button["state"] = "disabled"
         else:
             self.return_date["state"] = "normal"
-            self.book_button["state"] = "disabled"
+            if self.check_box1() and self.check_box2():
+                self.book_button["state"] = "normal"
+            else:
+                self.book_button["state"] = "disabled"
+
 
     def validate_date(self, *args):
         focused_widget = self.focus_get()

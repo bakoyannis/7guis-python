@@ -73,6 +73,7 @@ class Application(tk.Tk):
         # Validate date entries
         if focused_widget in [self.start_date, self.return_date]:
             if not focused_widget.get():
+                focused_widget["bg"] = "white"
                 self.book_button["state"] = "disabled"
             else:
                 try:

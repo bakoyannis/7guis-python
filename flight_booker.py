@@ -45,6 +45,9 @@ class Application(tk.Tk):
         else:
             self.return_date.config(state="normal")
 
+        if self.flight_options.get() == "one-way flight" or "return flight":
+            self.book_button["state"] = "disabled"
+
     def validate_date(self, *args):
         focused_widget = self.focus_get()
 

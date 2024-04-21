@@ -32,11 +32,11 @@ class Application(tk.Tk):
         self.entry_val2.trace_add("write", self.validate_date)
         self.return_date = tk.Entry(self, textvariable=self.entry_val2)
         self.return_date["state"] = "disabled"
-        self.return_date.grid(row=2, sticky="nesw", padx=3, pady=3)
+        self.return_date.grid(row=2, sticky="nesw", padx=4, pady=4)
 
         # Set up book button
         self.book_button = ttk.Button(self, text="Book", command=self.display_message, state="disabled")
-        self.book_button.grid(row=3, sticky="nesw", padx=3, pady=3)
+        self.book_button.grid(row=3, sticky="nesw", padx=5, pady=5)
 
     def check_box1(self):
         try:
